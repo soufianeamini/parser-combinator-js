@@ -1,9 +1,16 @@
-import { parse_alpha } from "./advanced"
-import { parse_curly } from "./json"
+import { parse_json } from "./json"
 import { parser } from "./primitives"
 
-// let json = `{"name": "Soufiane"}`
+let json = `{
+  "name":"Soufiane"
+}`
 
-let test = "{a}"
+const [[key, value]] = parser(json)(parse_json)
 
-console.log(parser(test)(parse_curly(parse_alpha)))
+const obj: any = {}
+obj[key] = value
+
+console.log(`Json string: ${json}`)
+console.log("Object")
+console.log(obj)
+

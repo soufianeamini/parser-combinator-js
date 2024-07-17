@@ -35,15 +35,28 @@ export const apply = (f: any) => (p: any) => (input: string) => fails(p(input)) 
 
 export const between = (p1: any) => (p2: any) => (p3: any) => (input: string) => {
   const result1 = p1(input)
-  if (fails(result1)) [null, input]
+  if (fails(result1)) return [null, input]
 
   const result2 = p2(result1[1])
-  if (fails(result2)) [null, input]
+  if (fails(result2)) return [null, input]
 
   const result3 = p3(result2[1])
-  if (fails(result3)) [null, input]
+  if (fails(result3)) return [null, input]
 
   return [result2[0], result3[1]]
+}
+
+export const around = (p1: any) => (p2: any) => (p3: any) => (input: string) => {
+  const result1 = p1(input)
+  if (fails(result1)) return [null, input]
+
+  const result2 = p2(result1[1])
+  if (fails(result2)) return [null, input]
+
+  const result3 = p3(result2[1])
+  if (fails(result3)) return [null, input]
+
+  return [[result1[0], result3[0]], result3[1]]
 }
 
 export const many = (p: any) => (input: string) => {
