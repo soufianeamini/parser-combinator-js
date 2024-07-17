@@ -16,6 +16,13 @@ export const and = (p1: any) => (p2: any) => (input: string) => {
   return [[result1[0], result2[0]], result2[1]]
 }
 
+export const opt = (p: any) => (input: string) => {
+  const result = p(input)
+  if (fails(result)) return ['', input]
+
+  return [result[0], result[1]]
+}
+
 export const parse_string = (p: any) => (input: string) => {
   const result = p(input)
   if (fails(result)) return [null, input]
