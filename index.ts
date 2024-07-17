@@ -1,6 +1,9 @@
+import { parse_alpha } from "./advanced"
+import { parse_curly } from "./json"
 import { parser } from "./primitives"
-import { parse_ident } from "./semantic"
 
-let text = "  _value3 lelele"
+// let json = `{"name": "Soufiane"}`
 
-console.log(parser(text)(parse_ident))
+let test = "{a}"
+
+console.log(parser(test)(parse_curly(parse_alpha)))
