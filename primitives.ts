@@ -26,4 +26,18 @@ export const parse_string = (p: any) => (input: string) => {
 
 export const apply = (f: any) => (p: any) => (input: string) => fails(p(input)) ? [null, input] : f(p(input))
 
-const many = () => ({})
+export const many = (p: any) => (input: string) => {
+  let resultList: any[] | null = []
+  let newInput = input
+  let result: any
+
+  while (!fails(p(newInput))) {
+    [result, newInput] = p(newInput)
+    resultList.push(result)
+  }
+
+  if (resultList.length === 0)
+    resultList = null
+
+  return [resultList, newInput]
+}
