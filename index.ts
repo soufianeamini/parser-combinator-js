@@ -5,7 +5,7 @@ let json = `{
   "name":"Soufiane"
 }`
 
-const [[key, value]] = parser(json)(parse_json)
+const [[key, value]] = parser(parse_json)(json)
 
 const obj: any = {}
 obj[key] = value
@@ -13,4 +13,3 @@ obj[key] = value
 console.log(`Json string: ${json}`)
 console.log("Object")
 console.log(obj)
-
