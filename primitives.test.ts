@@ -1,4 +1,4 @@
-import { and, char, many, or, parser } from "./primitives"
+import { and, between, char, many, or, parser } from "./primitives"
 
 describe("char", () => {
   test(`parses the character 'h' from "hello"`, () => {
@@ -60,4 +60,18 @@ describe("many", () => {
     const res = parser(p)("ayep")
     expect(res).toStrictEqual([null, "ayep"])
   })
+})
+
+describe("between", () => {
+	test(`parses the char 'a' between curly braces`, () => {
+		const p = between(char("{"))(char("a"))(char("}"))
+		const res = parser(p)("{a}")
+		expect(res).toStrictEqual(["a", ""])
+	})
+
+	test(`doesn't parse the 'a' between different contours`, () => {
+		const p = between(char("{"))(char("a"))(char("}"))
+		const res = parser(p)("(a)")
+		expect(res).toStrictEqual([null, "(a)"])
+	}) 
 })
