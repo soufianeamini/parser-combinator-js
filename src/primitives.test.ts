@@ -63,15 +63,15 @@ describe("many", () => {
 })
 
 describe("between", () => {
-	test(`parses the char 'a' between curly braces`, () => {
-		const p = between(char("{"))(char("a"))(char("}"))
-		const res = parser(p)("{a}")
-		expect(res).toStrictEqual(["a", ""])
-	})
+  test(`parses the char 'a' between curly braces`, () => {
+    const p = between(char("{"))(char("a"))(char("}"))
+    const res = parser(p)("{a}")
+    expect(res).toStrictEqual(["a", ""])
+  })
 
-	test(`doesn't parse the 'a' between different contours`, () => {
-		const p = between(char("{"))(char("a"))(char("}"))
-		const res = parser(p)("(a)")
-		expect(res).toStrictEqual([null, "(a)"])
-	}) 
+  test(`doesn't parse the 'a' between different contours`, () => {
+    const p = between(char("{"))(char("a"))(char("}"))
+    const res = parser(p)("(a)")
+    expect(res).toStrictEqual([null, "(a)"])
+  })
 })
